@@ -1,0 +1,11 @@
+<div>
+    <h3>Joke Number {{jokeNumber}}:</h3>
+    
+    <div *ngIf="joke?.type ==='single'">{{joke?.joke}}</div>
+    <div *ngIf="joke?.type !=='single'">
+        <dl>
+            <dt>{{joke?.setup}}</dt>
+            <dd>{{joke?.delivery}}</dd>
+        </dl>
+    </div>
+</div>
