@@ -1,0 +1,21 @@
+<h1>Angular Joke Services Demo</h1>
+
+<!-- 
+    Pretty easy for business logic to creep into the your presentation layer if you're not careful. 
+    This is true of both standard Angular and NgRx flavors.
+-->
+<div>Get started by adding 3 jokes at once: <button (click)="jokeCount=3">Third time's a charm!</button></div>
+
+<!--
+    Much better to have each button run functions that are testable
+-->
+<div>
+    <button (click)="addJoke()">Add another joke copy</button>
+
+    <button (click)="refreshCurrentJoke()">This joke is old...Boooo</button>
+
+    <button (click)="removeAllJokes()">Remove all jokes</button>
+</div>
+
+<!-- since jokes is just an array of numbers we'll pass each element to the individual joke-->
+<app-joke *ngFor="let joke of jokes" [jokeNumber]="joke"></app-joke>
