@@ -7,6 +7,7 @@ import { JokesListComponent } from './jokes-list/jokes-list.component';
 import { JokeComponent } from './joke/joke.component';
 import { JokeService } from './joke.service';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [JokeService],
   bootstrap: [AppComponent]
