@@ -1,10 +1,9 @@
 <h1>Angular Joke Services Demo</h1>
-
+<h2>Joke count: {{count$ | async}}</h2>
 <!-- 
-    Pretty easy for business logic to creep into the your presentation layer if you're not careful. 
-    This is true of both standard Angular and NgRx flavors.
+    Harder for business logic to explicitly be in here with the NgRx pattern - need to have a separate function
 -->
-<div>Get started by adding 3 jokes at once: <button (click)="jokeCount=3">Third time's a charm!</button></div>
+<div>Get started by adding 3 jokes at once: <button (click)="setJokesNumber(3)">Third time's a charm!</button></div>
 
 <!--
     Much better to have each button run functions that are testable

@@ -1,33 +1,29 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { State, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { JokeService } from '../joke.service';
+import { JokeDisplay } from '../models/joke-display.model';
 import { Joke } from '../models/joke.model';
+import { jokeState } from '../reducers/joke.reducer';
 
 @Component({
   selector: 'app-joke',
   templateUrl: './joke.component.html',
   styleUrls: ['./joke.component.scss']
 })
-export class JokeComponent implements OnInit, OnDestroy {
+export class JokeComponent implements OnInit {
 
   @Input()
   jokeNumber: number = -1;
-  joke?: Joke;
-  jokeSubscription?: Subscription;
+  
+  joke$: Observable<JokeDisplay | undefined>;
 
-  constructor(private jokeService: JokeService) { }
-
-  ngOnInit(): void {
-    // this sets up a subscription to get any future updates - to dig into this go check out how the JokeService works
-    this.jokeSubscription = this.jokeService.getJoke().subscribe((next) => {this.joke = next;});
-
-    // if you use this single refresh call, the subscription immediately completes so no unsubscribing is necessary
-    // this.jokeService.getSingleFreshJoke().subscribe((next) => {this.joke = next;});
+  constructor(private store: Store<{joke: jokeState}>) { 
+    this.joke$ = store.select(s => s.joke.currentJoke);
   }
 
-  ngOnDestroy(): void {
-    // because we're keeping an active subscription we need to make sure we destroy that subscription along with the component
-    this.jokeSubscription?.unsubscribe();
+  ngOnInit(): void {
+    // this becomes pretty difficult to have each joke become responsible for getting its own joke
   }
 
 }

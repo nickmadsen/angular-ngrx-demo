@@ -1,11 +1,11 @@
 <div>
     <h3>Joke Number {{jokeNumber}}:</h3>
     
-    <div *ngIf="joke?.type ==='single'">{{joke?.joke}}</div>
-    <div *ngIf="joke?.type !=='single'">
+    <div *ngIf="(joke$ | async)?.joke">{{(joke$ | async)?.joke}}</div>
+    <div *ngIf="(joke$ | async)?.setup">
         <dl>
-            <dt>{{joke?.setup}}</dt>
-            <dd>{{joke?.delivery}}</dd>
+            <dt>{{(joke$ | async)?.setup}}</dt>
+            <dd>{{(joke$ | async)?.delivery}}</dd>
         </dl>
     </div>
 </div>
